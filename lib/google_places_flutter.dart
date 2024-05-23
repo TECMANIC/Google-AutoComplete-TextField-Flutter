@@ -29,6 +29,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final bool showError;
   final double? containerHorizontalPadding;
   final double? containerVerticalPadding;
+  final FocusNode? focusNode;
   final double? latitude;
   final double? longitude;
   /// This is expressed in **meters**
@@ -50,6 +51,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
       this.seperatedBuilder,this.showError=true,
       this.containerHorizontalPadding,
       this.containerVerticalPadding,
+      this.focusNode,
       this.clearData,
       this.latitude,
       this.longitude,
@@ -101,6 +103,7 @@ class _GooglePlaceAutoCompleteTextFieldState
                 decoration: widget.inputDecoration,
                 style: widget.textStyle,
                 controller: widget.textEditingController,
+                focusNode: widget.focusNode ?? FocusNode(),
                 onChanged: (string) {
                   subject.add(string);
                   if (widget.isCrossBtnShown) {
