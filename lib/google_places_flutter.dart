@@ -3,6 +3,7 @@ library google_places_flutter;
 
 import 'package:flutter/material.dart';
 import 'package:google_places_flutter/model/place_details.dart';
+import 'package:google_places_flutter/model/place_type.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 
 import 'package:dio/dio.dart';
@@ -30,6 +31,8 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final double? containerHorizontalPadding;
   final double? containerVerticalPadding;
   final FocusNode? focusNode;
+  /// Up to 5 values are supported by the Google Places API.
+  final List<PlaceType>? placeTypes;
   final double? latitude;
   final double? longitude;
   /// This is expressed in **meters**
@@ -53,6 +56,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
       this.containerVerticalPadding,
       this.focusNode,
       this.clearData,
+      this.placeTypes,
       this.latitude,
       this.longitude,
       this.radius
@@ -144,6 +148,10 @@ class _GooglePlaceAutoCompleteTextFieldState
 
     if(widget.latitude != null && widget.longitude != null && widget.radius != null) {
       url = url + "&location=${widget.latitude},${widget.longitude}&radius=${widget.radius}";
+    }
+
+    if(widget.placeTypes != null && widget.placeTypes!.isNotEmpty) {
+      url = url + "&types=" + widget.placeTypes!.join('|');
     }
 
     if (_cancelToken?.isCancelled == false) {
