@@ -32,7 +32,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final double? containerVerticalPadding;
   final FocusNode? focusNode;
   /// Up to 5 values are supported by the Google Places API.
-  final List<PlaceType>? placeTypes;
+  final List<String>? placeTypes;
   final double? latitude;
   final double? longitude;
   /// This is expressed in **meters**
